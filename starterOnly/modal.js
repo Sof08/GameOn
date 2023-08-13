@@ -76,7 +76,7 @@ function validate () {
   }
   // Utiliser mailRegex afin de vérifier l'@mail
   if(mailRegex.test(email.value)== false){
-    email_erreur.innerHTML  ="Veuillez entrer un email correct";
+    email_erreur.innerHTML  ="Veuillez entrer un email correct !";
   }
   else{
     email_erreur.innerHTML  = "";
@@ -84,7 +84,7 @@ function validate () {
 
   // Pour le nombre de concours, une valeur numérique est saisie || non vide 
   if (nb_concours.value == '' || concoursRegex.test(nb_concours.value) == false){
-    concours_erreur.innerHTML  = "Veuillez entrer le nombre de tournois participé";
+    concours_erreur.innerHTML  = "Veuillez entrer le nombre de tournois !";
   }else{
     concours_erreur.innerHTML  = "";
   }
@@ -98,7 +98,7 @@ function validate () {
       location = locationList[i].value;
       return true;
     } else {
-      location_erreur.innerHTML = "Vous devez choisir une option";
+      location_erreur.innerHTML = "Aucune option n'a été choisi, vous devez choisir une option !";
     }
   }
 
@@ -107,7 +107,7 @@ function validate () {
     condition_erreur.innerHTML  = "";
   }
   else{
-    condition_erreur.innerHTML  ="Vous devez vérifier que vous acceptez les termes et conditions";
+    condition_erreur.innerHTML  ="Vous n'avez pas acceptez les termes et conditions d'utilisation !";
   }
 
  
