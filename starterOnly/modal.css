@@ -71,6 +71,7 @@ img {
 .msg_erreur{
   font-size: 15px;
   color: red;
+  display: block;
 }
 
 @media screen and (max-width: 768px) {

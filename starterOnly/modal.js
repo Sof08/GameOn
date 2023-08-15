@@ -32,8 +32,13 @@ const checkbox2 = document.getElementById("checkbox2");
 const condition_erreur = document.getElementById("condition_error");
 
 const submitBtn = document.querySelector(".btn-submit");
+var value;
 
-
+//list Regex
+var mailRegex = /^([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$/;
+var nomRegex = /^[a-zA-Zéèîï][a-zéèêàçîï]+([-'\s][a-zA-Zéèîï][a-zéèêàçîï]+)?/;
+var concoursRegex =/^[0-9][0-9]?$|^999$/;
+var naissanceRegex = /^([0-9]{2})|([0-9]{2})|([0-9]{4})$/;
 
 
 
@@ -47,7 +52,6 @@ modalClose[0].addEventListener ("click", closeModal);
 function launchModal() {
   modalbg.style.display = "block";
 }
-
 
 //fermer la modale
 function closeModal() {
@@ -72,6 +76,7 @@ function validate () {
   }else{
     nom_erreur.innerHTML  = "";
   }
+
   // Utiliser mailRegex afin de vérifier l'@mail
   if(mailRegex.test(email.value)== false){
     email_erreur.innerHTML  ="Veuillez entrer un email correct !";
@@ -79,11 +84,13 @@ function validate () {
   else{
     email_erreur.innerHTML  = "";
   }
+
   if (date_naiss.value.trim() == '' || date_naiss.value.length < 2){
     date_naiss_erreur.innerHTML = "Vous devez entrer votre date de naissance.";
-  }else{ //validation champs prenom
+  }else{ 
     date_naiss_erreur.innerHTML  = "";
   }
+
   // Pour le nombre de concours, une valeur numérique est saisie || non vide 
   if (nb_concours.value == '' || concoursRegex.test(nb_concours.value) == false){
     concours_erreur.innerHTML  = "Veuillez entrer le nombre de tournois !";
@@ -91,28 +98,26 @@ function validate () {
     concours_erreur.innerHTML  = "";
   }
 
- 
-
   // verifier si une localisation est sélectionnée.
   let location = ""
   for (let i = 0; i < locationList.length; i++) {
-    if (locationList[i].checked) {
+    if (locationList[i].checked ) {
       location = locationList[i].value;
-      return true;
-    } else {
+      location_erreur.innerHTML = "";
+    } else if (location == ''){
       location_erreur.innerHTML = "Vous devez choisir une option.";
     }
   }
 
+     
+  
   // vérifier si les conditions sont cochées 
   if(checkbox1.checked){
     condition_erreur.innerHTML  = "";
-  }
-  else{
+  }else{
     condition_erreur.innerHTML  ="Vous devez vérifier que vous acceptez les termes et conditions";
   }
 
- 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
   })
