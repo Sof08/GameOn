@@ -21,6 +21,8 @@ const nom =  document.getElementById("last");
 const nom_erreur =document.getElementById("last_error");
 const email =  document.getElementById("email");
 const email_erreur = document.getElementById("email_error");
+const date_naiss = document.getElementById("birthdate");
+const date_naiss_erreur = document.getElementById("date_naiss_error");
 const nb_concours = document.getElementById("quantity");
 const concours_erreur = document.getElementById("quantity_error");
 const locationList = document.querySelectorAll('input[name="location"]');
@@ -33,11 +35,7 @@ const submitBtn = document.querySelector(".btn-submit");
 
 
 
-//List regex
-var mailRegex = /^([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$/;
-var nomRegex = /^[a-zA-Zéèîï][a-zéèêàçîï]+([-'\s][a-zA-Zéèîï][a-zéèêàçîï]+)?/;
-var concoursRegex =/^[0-9][0-9]?$|^999$/;
-var naissanceRegex = /^([0-9]{2})|([0-9]{2})|([0-9]{4})$/;
+
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -81,7 +79,11 @@ function validate () {
   else{
     email_erreur.innerHTML  = "";
   }
-
+  if (date_naiss.value.trim() == '' || date_naiss.value.length < 2){
+    date_naiss_erreur.innerHTML = "Vous devez entrer votre date de naissance.";
+  }else{ //validation champs prenom
+    date_naiss_erreur.innerHTML  = "";
+  }
   // Pour le nombre de concours, une valeur numérique est saisie || non vide 
   if (nb_concours.value == '' || concoursRegex.test(nb_concours.value) == false){
     concours_erreur.innerHTML  = "Veuillez entrer le nombre de tournois !";
@@ -89,7 +91,7 @@ function validate () {
     concours_erreur.innerHTML  = "";
   }
 
-
+ 
 
   // verifier si une localisation est sélectionnée.
   let location = ""
@@ -98,7 +100,7 @@ function validate () {
       location = locationList[i].value;
       return true;
     } else {
-      location_erreur.innerHTML = "Aucune option n'a été choisi, vous devez choisir une option !";
+      location_erreur.innerHTML = "Vous devez choisir une option.";
     }
   }
 
@@ -107,7 +109,7 @@ function validate () {
     condition_erreur.innerHTML  = "";
   }
   else{
-    condition_erreur.innerHTML  ="Vous n'avez pas acceptez les termes et conditions d'utilisation !";
+    condition_erreur.innerHTML  ="Vous devez vérifier que vous acceptez les termes et conditions";
   }
 
  
