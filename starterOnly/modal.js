@@ -32,6 +32,10 @@ const checkbox2 = document.getElementById("checkbox2");
 const condition_erreur = document.getElementById("condition_error");
 
 const submitBtn = document.querySelector(".btn-submit");
+
+//Pop UP confiramtion 
+const modalSubmit = document.getElementsByClassName('content_confirmation');
+const closeModalSubmit = document.getElementsByClassName("close_submit");
 var value;
 
 //list Regex
@@ -48,6 +52,9 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // Close modal event=> Fermer Form class "bground"
 modalClose[0].addEventListener ("click", closeModal);
 
+// EVENT CLOSE MODAL SUBMIT
+closeModalSubmit[0].addEventListener('click', closeSubmit);
+
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
@@ -57,45 +64,61 @@ function launchModal() {
 function closeModal() {
   modalbg.style.display = "none";
 };
+//fermer popUP Confiramtion
+function closeSubmit() {
+  modalSubmit[0].style.display = 'none';
+}
+
+
 
 //Bouton valider pour envoyer le formulaire
 submitBtn.addEventListener("click",validate); 
 
-function validate () {
+function validate (e) {
 
   //Affichage du message d'erreur si le champs Prénom n'est pas vide ou < a 2 caractères : retourne true 
   if (prenom.value.trim() == '' || prenom.value.length < 2){
     prenom_erreur.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+    check_prenom = false;
   }else{ //validation champs prenom
     prenom_erreur.innerHTML  = "";
+    check_prenom = true;
   }
   
   //Affichage du message d'erreur si le champs NOM n'est pas vide ou < a 2 caractères : retourne true 
   if (nom.value.trim() == '' || nom.value.length <2){
     nom_erreur.innerHTML  = "Veuillez entrer 2 caractères ou plus pour le champ du nom."; 
+    check_nom = false;
   }else{
     nom_erreur.innerHTML  = "";
+    check_nom = true;
   }
 
   // Utiliser mailRegex afin de vérifier l'@mail
   if(mailRegex.test(email.value)== false){
     email_erreur.innerHTML  ="Veuillez entrer un email correct !";
+    check_mail = false;
   }
   else{
     email_erreur.innerHTML  = "";
+    check_mail = true;
   }
 
   if (date_naiss.value.trim() == '' || date_naiss.value.length < 2){
     date_naiss_erreur.innerHTML = "Vous devez entrer votre date de naissance.";
+    check_dnaiss = false;
   }else{ 
     date_naiss_erreur.innerHTML  = "";
+    check_dnaiss = true;
   }
 
   // Pour le nombre de concours, une valeur numérique est saisie || non vide 
   if (nb_concours.value == '' || concoursRegex.test(nb_concours.value) == false){
     concours_erreur.innerHTML  = "Veuillez entrer le nombre de tournois !";
+    check_tournois = false;
   }else{
     concours_erreur.innerHTML  = "";
+    check_tournois = true;
   }
 
   // verifier si une localisation est sélectionnée.
@@ -104,8 +127,10 @@ function validate () {
     if (locationList[i].checked ) {
       location = locationList[i].value;
       location_erreur.innerHTML = "";
+      check_location = true;
     } else if (location == ''){
       location_erreur.innerHTML = "Vous devez choisir une option.";
+      check_location = false;
     }
   }
 
@@ -114,14 +139,24 @@ function validate () {
   // vérifier si les conditions sont cochées 
   if(checkbox1.checked){
     condition_erreur.innerHTML  = "";
+    check_condition = true;
   }else{
     condition_erreur.innerHTML  ="Vous devez vérifier que vous acceptez les termes et conditions";
+    check_condition = false;
   }
 
-  form.addEventListener('submit', function (e) {
+    //Bloquer la fermeture de la popUp inscription 
     e.preventDefault();
-  })
   
+    
+  //Vérfifier que les champs sont bien renseignés afin d'envoyer popUp Confirmation 
+    if(check_prenom == true && check_nom == true && check_mail== true &&
+      check_dnaiss == true && check_location == true && check_tournois == true
+       && check_condition == true){
+    
+      modalbg.style.display = 'none';
+      modalSubmit[0].style.display = 'block';
+    }
+    
+    
 }
-
-
