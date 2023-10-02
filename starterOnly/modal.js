@@ -6,7 +6,7 @@ function editNav() {
     x.className = "topnav";
   }
 }
-
+ 
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
@@ -49,10 +49,10 @@ var naissanceRegex = /^([0-9]{2})|([0-9]{2})|([0-9]{4})$/;
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// Close modal event=> Fermer Form class "bground"
+// Close modal event=> Fermer Form class "bground" => POPUP formulaire
 modalClose[0].addEventListener ("click", closeModal);
 
-// EVENT CLOSE MODAL SUBMIT
+// EVENT CLOSE MODAL SUBMIT => POPUP confirmation d'envoi
 closeModalSubmit[0].addEventListener('click', closeSubmit);
 
 // launch modal form
