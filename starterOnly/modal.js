@@ -41,6 +41,7 @@ var value;
 //list Regex
 var mailRegex = /^([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$/;
 var nomRegex = /^[a-zA-Zéèîï][a-zéèêàçîï]+([-'\s][a-zA-Zéèîï][a-zéèêàçîï]+)?/;
+var prenomRegex = /^[a-zA-Zéèîï][a-zéèêàçîï]+([-'\s][a-zA-Zéèîï][a-zéèêàçîï]+)?/;
 var concoursRegex =/^[0-9][0-9]?$|^999$/;
 var naissanceRegex = /^([0-9]{2})|([0-9]{2})|([0-9]{4})$/;
 
@@ -55,16 +56,17 @@ modalClose[0].addEventListener ("click", closeModal);
 // EVENT CLOSE MODAL SUBMIT => POPUP confirmation d'envoi
 closeModalSubmit[0].addEventListener('click', closeSubmit);
 
-// launch modal form
+
+
+// launch modal form affic
 function launchModal() {
   modalbg.style.display = "block";
 }
-
-//fermer la modale
+//fermer la modale cache
 function closeModal() {
   modalbg.style.display = "none";
 };
-//fermer popUP Confiramtion
+//fermer popUP Confiramtion cache
 function closeSubmit() {
   modalSubmit[0].style.display = 'none';
 }
@@ -77,16 +79,16 @@ submitBtn.addEventListener("click",validate);
 function validate (e) {
 
   //Affichage du message d'erreur si le champs Prénom n'est pas vide ou < a 2 caractères : retourne true 
-  if (prenom.value.trim() == '' || prenom.value.length < 2){
+  if (prenom.value.trim() == '' || prenom.value.length < 2 || prenomRegex.test(prenom.value) == false) {
     prenom_erreur.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
     check_prenom = false;
   }else{ //validation champs prenom
-    prenom_erreur.innerHTML  = "";
+       prenom_erreur.innerHTML  = "";
     check_prenom = true;
   }
   
   //Affichage du message d'erreur si le champs NOM n'est pas vide ou < a 2 caractères : retourne true 
-  if (nom.value.trim() == '' || nom.value.length <2){
+  if (nom.value.trim() == '' || nom.value.length < 2 || nomRegex.test(nom.value) == false ){
     nom_erreur.innerHTML  = "Veuillez entrer 2 caractères ou plus pour le champ du nom."; 
     check_nom = false;
   }else{
