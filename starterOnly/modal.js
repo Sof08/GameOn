@@ -55,7 +55,10 @@ modalClose[0].addEventListener ("click", closeModal);
 
 
 // EVENT CLOSE MODAL SUBMIT => POPUP confirmation d'envoi
-closeModalSubmit[0].addEventListener('click', closeSubmit);
+document.getElementById('close_confirmation').addEventListener('click', closeSubmit);
+
+// EVENT CLOSE MODAL SUBMIT => POPUP confirmation d'envoi
+document.getElementById('close_confirmation_btn').addEventListener('click', closeSubmit);
 
 
 
