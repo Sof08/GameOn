@@ -53,6 +53,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // Close modal event=> Fermer Form class "bground" => POPUP formulaire
 modalClose[0].addEventListener ("click", closeModal);
 
+
 // EVENT CLOSE MODAL SUBMIT => POPUP confirmation d'envoi
 closeModalSubmit[0].addEventListener('click', closeSubmit);
 
@@ -158,6 +159,8 @@ function validate (e) {
     
       modalbg.style.display = 'none';
       modalSubmit[0].style.display = 'block';
+      //Réinitialiser le formulaire 
+      document.querySelector('form').reset();
     }
     
     
